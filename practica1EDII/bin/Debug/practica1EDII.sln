@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.33801.447
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{911E67C6-3D85-4FCE-B560-20A9C3E3FF48}") = "practica1EDII", "practica1EDII.exe", "{414BF6C5-CFD5-4592-ADF9-A7DAB663B208}"
+	ProjectSection(DebuggerProjectSystem) = preProject
+		PortSupplier = 00000000-0000-0000-0000-000000000000
+		Executable = C:\Users\usuario\Downloads\[v20_03] Material Practica 2 (2324)\practica1EDII\bin\Debug\practica1EDII.exe
+		RemoteMachine = pc21-085
+		StartingDirectory = C:\Users\usuario\Downloads\[v20_03] Material Practica 2 (2324)\practica1EDII\bin\Debug
+		Environment = Predeterminado
+		LaunchingEngine = 00000000-0000-0000-0000-000000000000
+		UseLegacyDebugEngines = No
+		LaunchSQLEngine = No
+		AttachLaunchAction = No
+		IORedirection = Auto
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{414BF6C5-CFD5-4592-ADF9-A7DAB663B208}.Release|x64.ActiveCfg = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2D539EDF-B235-405B-B021-2E6FC22C9F26}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,67 @@
+# depslib dependency file v1.0
+1712667382 source:c:\users\usuario\downloads\[v20_03] material practica 2 (2324)\practica2.cpp
+	<iostream>
+	<cstdlib>
+	<queue>
+	"arbin.h"
+	"abb.h"
+	"Excep_Ej6.h"
+
+1710328930 c:\users\usuario\downloads\[v20_03] material practica 2 (2324)\arbin.h
+	"nodoB.h"
+	"excep_arbin.h"
+
+1611775092 c:\users\usuario\downloads\[v20_03] material practica 2 (2324)\nodob.h
+	<stdlib.h>
+
+1611775092 c:\users\usuario\downloads\[v20_03] material practica 2 (2324)\excep_arbin.h
+	"excepcion.h"
+
+1611775092 c:\users\usuario\downloads\[v20_03] material practica 2 (2324)\excepcion.h
+	<string>
+	<stdexcept>
+
+1710860616 c:\users\usuario\downloads\[v20_03] material practica 2 (2324)\abb.h
+	"nodoB.h"
+	"excep_abb.h"
+	"arbin.h"
+
+1611775092 c:\users\usuario\downloads\[v20_03] material practica 2 (2324)\excep_abb.h
+	"excepcion.h"
+
+1618481162 c:\users\usuario\downloads\[v20_03] material practica 2 (2324)\excep_ej6.h
+	"excepcion.h"
+
+1712671692 source:c:\users\g10by\downloads\[v20_03] material practica 2 (2324)\practica2.cpp
+	<iostream>
+	<cstdlib>
+	<queue>
+	"arbin.h"
+	"abb.h"
+	"Excep_Ej6.h"
+
+1712671692 c:\users\g10by\downloads\[v20_03] material practica 2 (2324)\arbin.h
+	"nodoB.h"
+	"excep_arbin.h"
+
+1712671692 c:\users\g10by\downloads\[v20_03] material practica 2 (2324)\nodob.h
+	<stdlib.h>
+
+1712671692 c:\users\g10by\downloads\[v20_03] material practica 2 (2324)\excep_arbin.h
+	"excepcion.h"
+
+1712671692 c:\users\g10by\downloads\[v20_03] material practica 2 (2324)\excepcion.h
+	<string>
+	<stdexcept>
+
+1712671692 c:\users\g10by\downloads\[v20_03] material practica 2 (2324)\abb.h
+	"nodoB.h"
+	"excep_abb.h"
+	"arbin.h"
+
+1712671692 c:\users\g10by\downloads\[v20_03] material practica 2 (2324)\excep_abb.h
+	"excepcion.h"
+
+1712671692 c:\users\g10by\downloads\[v20_03] material practica 2 (2324)\excep_ej6.h
+	"excepcion.h"
+
