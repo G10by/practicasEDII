@@ -68,21 +68,24 @@ int numHojas(const Arbin<char> &a, const typename Arbin<char>::Iterador &r){
 
 
 int numHojas(const Arbin<char>& a){
-    typename Arbin<char>::Iterador r(a.getRaiz());
-    return (numHojas(a, a.subDer(r)) + numHojas(a,a.subIzq(r)));
+    return (numHojas(a, a.subDer(a.getRaiz())) + numHojas(a,a.subIzq(a.getRaiz())));
 }
 
 /****************************************************************************/
 //Ejercicio 2
-template<typename T>
-void simetrico(const ABB<char> &a, const typename Arbin<T>::Iterador r){
-    typename Arbin<T>::Iterador tmp(a.subIzq(r));
+void simetrico(const Arbin<char> &a, const typename Arbin<char>::Iterador r){
+    if(!a.esVacio())
+        throw ArbolVacioExcepcion();
+    //intercambio
 
+
+    simetrico(a, a.subDer(a.getRaiz()));
+    simetrico(a, a.subIzq(a.getRaiz()));
 }
 
-template <typename T>
-Arbin<T> simetrico(const Arbin<T> &a){
 
+Arbin<char> simetrico(const Arbin<char> &a){
+    simetrico(a, a.getRaiz());
 }
 
 /****************************************************************************/
@@ -125,6 +128,32 @@ Arbin<T> simetrico(const Arbin<T> &a){
 /******************************************************************************/
 //Ejercicio 7
 
+char** palabra(const Arbin<char>& a, const Arbin<char>::Iterador r, int filas = 1, int columnas = 1){
+    if(a.subDer(a.getRaiz()).arbolVacio() && a.subIzq(a.getRaiz()).arbolVacio())
+        columnas++;
+
+    filas++;
+
+    pbr[0][0] = a.getRaiz().observar();
+
+    char** pbr = new char*[filas];
+    for(int i = 0; i < filas; i++)
+        pbr[i] = new char[columnas];
+
+
+
+    if(a.esVacio())
+        throw ArbolVacioExcepcion();
+
+
+    palabra(a, a.subDer(a.getRaiz()));
+    palabra(a, a.subIzq(a.getRaiz()));
+    return pbr;
+}
+
+void palabra(const Arbin<char>& a){
+    cout << palabra(a, a.getRaiz()) << endl ;
+}
 
 /******************************************************************************/
 //Ejercicio 8
