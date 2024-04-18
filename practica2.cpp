@@ -128,31 +128,40 @@ Arbin<char> simetrico(const Arbin<char> &a){
 /******************************************************************************/
 //Ejercicio 7
 
-char** palabra(const Arbin<char>& a, const Arbin<char>::Iterador r, int filas = 1, int columnas = 1){
-    if(a.subDer(a.getRaiz()).arbolVacio() && a.subIzq(a.getRaiz()).arbolVacio())
-        columnas++;
-
-    filas++;
-
-    pbr[0][0] = a.getRaiz().observar();
-
-    char** pbr = new char*[filas];
-    for(int i = 0; i < filas; i++)
-        pbr[i] = new char[columnas];
-
+void palabra(const Arbin<char>& a, const Arbin<char>::Iterador r, char** pbr, int filas = 0, int columnas = 0){
 
 
     if(a.esVacio())
         throw ArbolVacioExcepcion();
 
+    if(a.subDer(a.getRaiz()).arbolVacio() && a.subIzq(a.getRaiz()).arbolVacio()){
+        filas++;
+        columnas = 0;
+    }
 
-    palabra(a, a.subDer(a.getRaiz()));
-    palabra(a, a.subIzq(a.getRaiz()));
-    return pbr;
+
+    columnas++;
+
+    char** pbr;
+    char** tmp = pbr;
+    pbr = new char*[filas+1];
+    for(int i = 0; i < filas; i++)
+        pbr[filas] = new char[columnas+1];
+    for(int i = 0; i < filas;)
+    pbr[filas][columnas] = a.getRaiz().observar();
+
+
+    pbr[0][0] = a.getRaiz().observar();
+
+    palabra(a, a.subDer(a.getRaiz()), pbr, filas, columnas);
+    palabra(a, a.subIzq(a.getRaiz()), pbr, filas, columnas);
+
 }
 
 void palabra(const Arbin<char>& a){
-    cout << palabra(a, a.getRaiz()) << endl ;
+    char** pbr;
+    palabra(a, a.getRaiz(), pbr);
+    for(int i = 0; i < pbr)
 }
 
 /******************************************************************************/
