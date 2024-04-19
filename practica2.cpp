@@ -99,6 +99,43 @@ Arbin<char> simetrico(const Arbin<char> &a){
 
 /*****************************************************************************/
 //Ejercicio 5
+void palabra(const Arbin<char>& a, const Arbin<char>::Iterador r, char** pbr, int filas = 0, int columnas = 0){
+
+
+    if(a.esVacio())
+        throw ArbolVacioExcepcion();
+
+    if(a.subDer(a.getRaiz()).arbolVacio() && a.subIzq(a.getRaiz()).arbolVacio()){
+        filas++;
+        columnas = 0;
+    }
+
+
+    columnas++;
+
+    char** pbr;
+    char** tmp = pbr;
+    pbr = new char*[filas+1];
+    for(int i = 0; i < filas; i++)
+        pbr[filas] = new char[columnas+1];
+    for(int i = 0; i < filash-1; i++)
+        for(int j = 0; j < columnas-1; j++)
+            pbr[i][j] = aux[i][j];
+    pbr[filas][columnas] = a.getRaiz().observar();
+
+
+    pbr[0][0] = a.getRaiz().observar();
+
+    palabra(a, a.subDer(a.getRaiz()), pbr, filas, columnas);
+    palabra(a, a.subIzq(a.getRaiz()), pbr, filas, columnas);
+
+}
+
+void palabra(const Arbin<char>& a){
+    char** pbr;
+    palabra(a, a.getRaiz(), pbr);
+    for(int i = 0; i < pbr)
+}
 
 
 
@@ -128,41 +165,6 @@ Arbin<char> simetrico(const Arbin<char> &a){
 /******************************************************************************/
 //Ejercicio 7
 
-void palabra(const Arbin<char>& a, const Arbin<char>::Iterador r, char** pbr, int filas = 0, int columnas = 0){
-
-
-    if(a.esVacio())
-        throw ArbolVacioExcepcion();
-
-    if(a.subDer(a.getRaiz()).arbolVacio() && a.subIzq(a.getRaiz()).arbolVacio()){
-        filas++;
-        columnas = 0;
-    }
-
-
-    columnas++;
-
-    char** pbr;
-    char** tmp = pbr;
-    pbr = new char*[filas+1];
-    for(int i = 0; i < filas; i++)
-        pbr[filas] = new char[columnas+1];
-    for(int i = 0; i < filas;)
-    pbr[filas][columnas] = a.getRaiz().observar();
-
-
-    pbr[0][0] = a.getRaiz().observar();
-
-    palabra(a, a.subDer(a.getRaiz()), pbr, filas, columnas);
-    palabra(a, a.subIzq(a.getRaiz()), pbr, filas, columnas);
-
-}
-
-void palabra(const Arbin<char>& a){
-    char** pbr;
-    palabra(a, a.getRaiz(), pbr);
-    for(int i = 0; i < pbr)
-}
 
 /******************************************************************************/
 //Ejercicio 8
