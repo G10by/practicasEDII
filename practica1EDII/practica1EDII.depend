@@ -65,3 +65,36 @@
 1712671692 c:\users\g10by\downloads\[v20_03] material practica 2 (2324)\excep_ej6.h
 	"excepcion.h"
 
+1713703492 source:c:\users\g10by\documents\github\practicasedii\practica2.cpp
+	<iostream>
+	<cstdlib>
+	<queue>
+	"arbin.h"
+	"abb.h"
+	"Excep_Ej6.h"
+
+1712671692 c:\users\g10by\documents\github\practicasedii\arbin.h
+	"nodoB.h"
+	"excep_arbin.h"
+
+1712671692 c:\users\g10by\documents\github\practicasedii\nodob.h
+	<stdlib.h>
+
+1712671692 c:\users\g10by\documents\github\practicasedii\excep_arbin.h
+	"excepcion.h"
+
+1712671692 c:\users\g10by\documents\github\practicasedii\excepcion.h
+	<string>
+	<stdexcept>
+
+1712671692 c:\users\g10by\documents\github\practicasedii\abb.h
+	"nodoB.h"
+	"excep_abb.h"
+	"arbin.h"
+
+1712671692 c:\users\g10by\documents\github\practicasedii\excep_abb.h
+	"excepcion.h"
+
+1712671692 c:\users\g10by\documents\github\practicasedii\excep_ej6.h
+	"excepcion.h"
+

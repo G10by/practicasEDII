@@ -59,38 +59,57 @@ void anchura(const Arbin<T>& a) {
 //Ejercicio 1
 
 int numHojas(const Arbin<char> &a, const typename Arbin<char>::Iterador &r){
-    if(a.subDer(r).arbolVacio() && a.subIzq(r).arbolVacio()){
-        return 1;
-    }
 
-    return 0;
+    if(r.arbolVacio())
+        return 0;
+
+    if(a.subDer(r).arbolVacio() && a.subIzq(r).arbolVacio())
+        return 1;
+
+    else
+        return numHojas(a, a.subDer(r)) + numHojas(a, a.subIzq(r));
 }
 
 
 int numHojas(const Arbin<char>& a){
-    return (numHojas(a, a.subDer(a.getRaiz())) + numHojas(a,a.subIzq(a.getRaiz())));
+    return numHojas(a, a.getRaiz());
 }
 
 /****************************************************************************/
 //Ejercicio 2
-void simetrico(const Arbin<char> &a, const typename Arbin<char>::Iterador r){
-    if(!a.esVacio())
-        throw ArbolVacioExcepcion();
-    //intercambio
 
+template<typename T>
+Arbin<T> simetrico(const Arbin<T> &a, const typename Arbin<T>::Iterador &r){
+    if(r.arbolVacio())
+        return Arbin<T>();
 
-    simetrico(a, a.subDer(a.getRaiz()));
-    simetrico(a, a.subIzq(a.getRaiz()));
+    return Arbin<T>(r.observar(), simetrico(a, a.subDer(r)), simetrico(a, a.subIzq(r)));
 }
 
+template<typename T>
+Arbin<T> simetrico(const Arbin<T> &a){
 
-Arbin<char> simetrico(const Arbin<char> &a){
-    simetrico(a, a.getRaiz());
+
+    return simetrico(a, a.getRaiz());
 }
 
 /****************************************************************************/
 //Ejercicio 3
+template<typename T>
+void recorridoZigzag(const Arbin<T>& a , const typename Arbin<T>::Iterador &r, char sentido){
+    if(!r.arbolVacio()){
+        cout << r.observar() << " ";
+        if(sentido = 'D')
+            recorridoZigzag(a, a.subDer(r), 'D');
+        else
+            recorridoZigzag(a, a.subIzq(r), 'I');
+    }
+}
 
+template<typename T>
+void recorridoZigzag(const Arbin<T>& a, char sentido){
+    recorridoZigzag(a, a.getRaiz(), sentido);
+}
 
 /******************************************************************************/
 //Ejercicio 4
@@ -113,14 +132,13 @@ void palabra(const Arbin<char>& a, const Arbin<char>::Iterador r, char** pbr, in
 
     columnas++;
 
-    char** pbr;
     char** tmp = pbr;
     pbr = new char*[filas+1];
     for(int i = 0; i < filas; i++)
         pbr[filas] = new char[columnas+1];
-    for(int i = 0; i < filash-1; i++)
+    for(int i = 0; i < filas-1; i++)
         for(int j = 0; j < columnas-1; j++)
-            pbr[i][j] = aux[i][j];
+            pbr[i][j] = tmp[i][j];
     pbr[filas][columnas] = a.getRaiz().observar();
 
 
@@ -134,7 +152,7 @@ void palabra(const Arbin<char>& a, const Arbin<char>::Iterador r, char** pbr, in
 void palabra(const Arbin<char>& a){
     char** pbr;
     palabra(a, a.getRaiz(), pbr);
-    for(int i = 0; i < pbr)
+
 }
 
 
@@ -213,7 +231,7 @@ int main(int argc, char *argv[])
 
 
 
- /*
+
 
     // COPIA SIMETRICA //
     Arbin<char> C = simetrico(B);
@@ -232,7 +250,7 @@ int main(int argc, char *argv[])
     cout << "Recorrido en zigzag D de C:\n";
     recorridoZigzag(C, 'D');
     cout << endl << endl;
-
+/*
 
     // COMPENSADO //
     cout << "Esta A compensado?:";
