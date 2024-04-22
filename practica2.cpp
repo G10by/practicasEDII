@@ -114,11 +114,27 @@ void recorridoZigzag(const Arbin<T>& a, char sentido){
 /******************************************************************************/
 //Ejercicio 4
 
+template <typename T>
+bool compensado(const Arbin<T> &a, const typename Arbin<T>::Iterador &r){
+    if(r.arbolVacio())
+        return true;
+    if(((a.subDer(r).altura() - a.subIzq(r).altura()) < -1) || (a.subDer(r).altura()) > 1)
+        return false;
+    else
+        return true;
+    compensado(a, a.subDer(r));
+    compensado(a, a.subIzq(r));
+}
+
+template <typename T>
+bool compensado(const Arbin<T> &a){
+    return compensado(a, a.getRaiz());
+}
 
 
 /*****************************************************************************/
 //Ejercicio 5
-void palabra(const Arbin<char>& a, const Arbin<char>::Iterador r, char** pbr, int filas = 0, int columnas = 0){
+void palabras(const Arbin<char>& a, const Arbin<char>::Iterador r, char** pbr, int filas = 0, int columnas = 0){
 
 
     if(a.esVacio())
@@ -144,15 +160,19 @@ void palabra(const Arbin<char>& a, const Arbin<char>::Iterador r, char** pbr, in
 
     pbr[0][0] = a.getRaiz().observar();
 
-    palabra(a, a.subDer(a.getRaiz()), pbr, filas, columnas);
-    palabra(a, a.subIzq(a.getRaiz()), pbr, filas, columnas);
+    palabras(a, a.subDer(a.getRaiz()), pbr, filas, columnas);
+    palabras(a, a.subIzq(a.getRaiz()), pbr, filas, columnas);
 
 }
 
-void palabra(const Arbin<char>& a){
+void palabras(const Arbin<char>& a){
     char** pbr;
-    palabra(a, a.getRaiz(), pbr);
-
+    palabras(a, a.getRaiz(), pbr);
+    for(int i = 0; i<(sizeof(pbr)/(sizeof(pbr[i])/sizeof(char))); i++){
+        cout << " ";
+        for(int j = 0; j<(sizeof(pbr[i])/sizeof(char)); j++)
+            cout << pbr[i][j];
+    }
 }
 
 
@@ -250,7 +270,7 @@ int main(int argc, char *argv[])
     cout << "Recorrido en zigzag D de C:\n";
     recorridoZigzag(C, 'D');
     cout << endl << endl;
-/*
+
 
     // COMPENSADO //
     cout << "Esta A compensado?:";
@@ -265,6 +285,7 @@ int main(int argc, char *argv[])
     palabras(B);
     cout << endl;
 
+/*
     // SIGUIENTE MAYOR
     BB6.insertar(8); BB6.insertar(3); BB6.insertar(10); BB6.insertar(1); BB6.insertar(6);
     BB6.insertar(14); BB6.insertar(4); BB6.insertar(7); BB6.insertar(13);
