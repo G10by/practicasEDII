@@ -5,6 +5,7 @@
 #include "abb.h"
 #include "Excep_Ej6.h"
 
+
 // Recorridos
 
 template <typename T>
@@ -134,7 +135,7 @@ bool compensado(const Arbin<T> &a){
 
 /*****************************************************************************/
 //Ejercicio 5
-void palabras(const Arbin<char>& a, const Arbin<char>::Iterador r, char** pbr, int filas = 0, int columnas = 0){
+/* void palabras(const Arbin<char>& a, const Arbin<char>::Iterador r, char** pbr, int filas = 0, int columnas = 0){
 
 
     if(a.esVacio())
@@ -174,39 +175,98 @@ void palabras(const Arbin<char>& a){
             cout << pbr[i][j];
     }
 }
+*/
 
+template<typename T>
+void palabras(const Arbin<T> &a){
+    string s;
+    palabras (a, a.getRaiz(), s);
+}
+
+template<typename T>
+void palabras(const Arbin<T> &a, const typename Arbin<T>::Iterador &r, string s){
+    if(!r.arbolVacio()){
+        s = s + r.observar();
+        palabras(a, a.subDer(r),s);
+        palabras(a, a.subIzq(r),s);
+        if(a.subIzq(r).arbolVacio() && a.subDer(r).arbolVacio()){
+            s = s + "/n";
+            cout << s;
+        }
+    }
+}
 
 
 /******************************************************************************/
 //Ejercicio 6
-/*int siguienteMayor(const ABB<int> & a, int x)throw (NoHaySiguienteMayor){
-    int sm = siguiente;
-    eRaiz= r.observat();
-    if(eRaiz == x){
-        if(!a.subDer(r).arbolVacio()){
-            sm = minimo (a, a.subDer(r));
-        }
-        else{
-            if(eRaiz < x){
-                siguienteMayor(a, a.subDer(r), x, sm);
-            }
-            else{
-                sm = eRaiz;
-                siguienteMayor(a, a.subIzq(r),x,sm);
-            }
-        }
-    }
-
+void siguienteMayor(const ABB<int>& a, const ABB<int>::Iterador& r, int
+x, int& sm) {
+//int nodoAct = r.observar();
+if(!r.arbolVacio()){
+if(x>=r.observar())
+siguienteMayor(a,a.subDer(r),x,sm);
+else {
+sm = r.observar();
+siguienteMayor(a,a.subIzq(r),x,sm);
 }
-*/
+}
+}
+int siguienteMayor(const ABB<int>& a, int x) throw (NoHaySiguienteMayor)
+{
+int sm = 0;
+siguienteMayor(a, a.getRaiz(), x, sm);
+if(sm==0)
+throw NoHaySiguienteMayor();
+else
+return sm;
+}
 
 /******************************************************************************/
 //Ejercicio 7
+template <typename T>
+int posicionInorden(const ABB<T>& a, T elem) {
+    int i=1;
+    return posicionInorden(a, elem, a.getRaiz(), i);
+}
 
-
+template <typename T>
+int posicionInorden(const ABB<T>& a, T elem, const typename ABB<T>::Iterador& r, int &i) {
+    int pos=0;
+    if(!r.arbolVacio()) {
+        pos = posicionInorden(a, elem, a.subIzq(r), i);
+        if(pos==0) {
+            if(r.observar()==elem)
+                pos=i;
+            else {
+                i++;
+                pos = posicionInorden(a, elem, a.subDer(r), i);
+                }
+        }
+    }
+    return pos;
+}
 /******************************************************************************/
 //Ejercicio 8
 
+bool haySumaCamino(const Arbin<int>& a, const Arbin<int>::Iterador& r,
+    int suma, int s) {
+    bool coinciden = false;
+    if(!r.arbolVacio() && !coinciden) {
+        s = s + r.observar();
+        coinciden = haySumaCamino(a, a.subIzq(r), suma, s);
+        if(a.subIzq(r).arbolVacio() && a.subDer(r).arbolVacio())
+            if(suma==s)
+                coinciden = true;
+        if(!coinciden)
+            coinciden = haySumaCamino(a, a.subDer(r), suma, s);
+    }
+    return coinciden;
+}
+
+bool haySumaCamino(const Arbin<int>& a, int suma) {
+    int s=0;
+    return haySumaCamino(a, a.getRaiz(), suma, s);
+}
 
 
 /****************************************************************************/
@@ -285,7 +345,7 @@ int main(int argc, char *argv[])
     palabras(B);
     cout << endl;
 
-/*
+
     // SIGUIENTE MAYOR
     BB6.insertar(8); BB6.insertar(3); BB6.insertar(10); BB6.insertar(1); BB6.insertar(6);
     BB6.insertar(14); BB6.insertar(4); BB6.insertar(7); BB6.insertar(13);
@@ -316,7 +376,7 @@ int main(int argc, char *argv[])
     cout << (haySumaCamino(F, 26) ? " SI" : " NO") << endl;
     cout << "Hay un camino de suma 9 en F?:";
     cout << (haySumaCamino(F, 9) ? " SI" : " NO") << endl;
-*/
+
 
     system("PAUSE");
     return 0;
