@@ -4,6 +4,7 @@
 #include "arbin.h"
 #include "abb.h"
 #include "Excep_Ej6.h"
+#define throw(NoHaySiguienteMayor)
 
 
 // Recorridos
@@ -116,20 +117,31 @@ void recorridoZigzag(const Arbin<T>& a, char sentido){
 //Ejercicio 4
 
 template <typename T>
-bool compensado(const Arbin<T> &a, const typename Arbin<T>::Iterador &r){
+int contar(const Arbin<T>& a, const typename Arbin<T>::Iterador &r) {
     if(r.arbolVacio())
-        return true;
-    if(((a.subDer(r).altura() - a.subIzq(r).altura()) < -1) || (a.subDer(r).altura()) > 1)
-        return false;
+        return 0;
     else
-        return true;
-    compensado(a, a.subDer(r));
-    compensado(a, a.subIzq(r));
+        return contar(a, a.subIzq(r)) + contar(a, a.subDer(r)) + 1;
 }
 
 template <typename T>
-bool compensado(const Arbin<T> &a){
+bool compensado(const Arbin<T>& a) {
     return compensado(a, a.getRaiz());
+}
+
+template <typename T>
+bool compensado(const Arbin<T>& a, const typename Arbin<T>::Iterador &r)
+{
+    if(r.arbolVacio() || (a.subIzq(r).arbolVacio() && a.subDer(r).arbolVacio()))
+        return true;
+    else {
+        int resta = contar(a, a.subIzq(r))-contar(a, a.subDer(r));
+        if(resta<=1 && resta>=-1)
+        return compensado(a, a.subIzq(r)) && compensado(a,
+        a.subDer(r));
+        else
+            return false;
+    }
 }
 
 
@@ -199,26 +211,25 @@ void palabras(const Arbin<T> &a, const typename Arbin<T>::Iterador &r, string s)
 
 /******************************************************************************/
 //Ejercicio 6
-void siguienteMayor(const ABB<int>& a, const ABB<int>::Iterador& r, int
-x, int& sm) {
+void siguienteMayor(const ABB<int>& a, const ABB<int>::Iterador& r, int x, int& sm) {
 //int nodoAct = r.observar();
-if(!r.arbolVacio()){
-if(x>=r.observar())
-siguienteMayor(a,a.subDer(r),x,sm);
-else {
-sm = r.observar();
-siguienteMayor(a,a.subIzq(r),x,sm);
+    if(!r.arbolVacio()){
+        if(x>=r.observar())
+            siguienteMayor(a,a.subDer(r),x,sm);
+        else {
+            sm = r.observar();
+            siguienteMayor(a,a.subIzq(r),x,sm);
+        }
+    }
 }
-}
-}
-int siguienteMayor(const ABB<int>& a, int x) throw (NoHaySiguienteMayor)
-{
-int sm = 0;
-siguienteMayor(a, a.getRaiz(), x, sm);
-if(sm==0)
-throw NoHaySiguienteMayor();
-else
-return sm;
+
+int siguienteMayor(const ABB<int>& a, int x) throw (NoHaySiguienteMayor){
+    int sm = 0;
+    siguienteMayor(a, a.getRaiz(), x, sm);
+    if(sm==0)
+        throw NoHaySiguienteMayor();
+    else
+    return sm;
 }
 
 /******************************************************************************/
@@ -266,6 +277,25 @@ bool haySumaCamino(const Arbin<int>& a, const Arbin<int>::Iterador& r,
 bool haySumaCamino(const Arbin<int>& a, int suma) {
     int s=0;
     return haySumaCamino(a, a.getRaiz(), suma, s);
+}
+
+template<typename T>
+const T& buscar(const Arbin<T> &a, const typename Arbin<T>::Iterador &r, const T& obj){
+    if(!r.arbolVacio()){
+        if(r.observar() == obj)
+            return r.observar();
+        else{
+            buscar(a, a.subIzq(r), obj);
+
+        }
+    }
+    else
+        buscar(a, a.subDer(r), obj);
+}
+
+template<typename T>
+void buscar(const Arbin<T>& a, const T& obj){
+    cout << buscar(a, a.getRaiz(), obj) << "\n";
 }
 
 
@@ -377,6 +407,9 @@ int main(int argc, char *argv[])
     cout << "Hay un camino de suma 9 en F?:";
     cout << (haySumaCamino(F, 9) ? " SI" : " NO") << endl;
 
+    //BUSCAR OBJ EN UN ARBOL
+
+    buscar(A, char('t'));
 
     system("PAUSE");
     return 0;
