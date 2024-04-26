@@ -3,7 +3,7 @@
 #include <queue>
 #include "arbin.h"
 #include "abb.h"
-#include "Excep_Ej6.h"
+#include "excep_Ej6.h"
 #define throw(NoHaySiguienteMayor)
 
 
@@ -298,6 +298,24 @@ void buscar(const Arbin<T>& a, const T& obj){
     cout << buscar(a, a.getRaiz(), obj) << "\n";
 }
 
+template<typename T>
+void eliminarNodo(const Arbin<T>& a, const typename Arbin<T>::Iterador& r, const T& obj){
+  if(!r.arbolVacio()){
+    if(r.observar() == obj){
+      if(a.subDer(r).arbolVacio() && a.subIzq(r).arbolVacio()){
+        r = nullptr;
+        delete r;
+      }
+      else if((!a.subDer(r).arbolVacio() && a.subIzq(r).arbolVacio()) || (a.subDer(r).arbolVacio() && !a.subIzq(r).arbolVacio()))
+        
+    }
+  }
+}
+
+template<typename T>
+void eliminarNodo(const Arbin<T>& a, const T& obj){
+
+}
 
 /****************************************************************************/
 /****************************************************************************/
